@@ -10,5 +10,5 @@ const exampleProps: WsPlayerProps = {
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <App {...exampleProps} />
-  </React.StrictMode>
+  </React.StrictMode>,
 );

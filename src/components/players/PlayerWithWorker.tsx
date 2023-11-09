@@ -23,7 +23,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
     if (!workerRef.current) {
       // Create a web worker when the component mounts
       workerRef.current = new Worker(
-        new URL("../../workers/Player.worker.js", import.meta.url)
+        new URL("../../workers/Player.worker.js", import.meta.url),
       );
 
       workerRef.current.onmessage = (e) => {
@@ -58,7 +58,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
                 0,
                 0,
                 width || canvas?.width || 0,
-                height || canvas?.height || 0
+                height || canvas?.height || 0,
               );
               // Draw the image on the canvas
               ctx.drawImage(
@@ -66,7 +66,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
                 0,
                 0,
                 width || image.width,
-                height || image.height
+                height || image.height,
               );
             }
           };
