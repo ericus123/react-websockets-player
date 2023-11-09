@@ -33,18 +33,21 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
             message: "WebSocket connection opened.",
             type: "warning",
             enabled: debug,
+            event: e,
           });
         } else if (message.type === "close") {
           log({
             message: "WebSocket connection closed.",
             type: "warning",
             enabled: debug,
+            event: e,
           });
         } else if (message.type === "error") {
           log({
             message: "WebSocket error",
             type: "error",
             enabled: debug,
+            event: e,
           });
           if (!isLoading) {
             setIsLoading(true);

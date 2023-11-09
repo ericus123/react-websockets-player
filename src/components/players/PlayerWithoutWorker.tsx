@@ -27,27 +27,30 @@ const PlayerWithoutWorker: FC<WsPlayerProps> = ({
 
       socketRef.current = new WebSocket(wsUrl);
 
-      socketRef.current.onopen = () => {
+      socketRef.current.onopen = (event) => {
         log({
           message: "WebSocket connection opened.",
           type: "message",
           enabled: debug,
+          event,
         });
       };
 
-      socketRef.current.onclose = () => {
+      socketRef.current.onclose = (event) => {
         log({
           message: "WebSocket connection closed.",
           type: "warning",
           enabled: debug,
+          event,
         });
       };
 
-      socketRef.current.onerror = () => {
+      socketRef.current.onerror = (event) => {
         log({
           message: "WebSocket error",
           type: "error",
           enabled: debug,
+          event,
         });
         if (isLoading) {
           setIsLoading(false);
