@@ -1,10 +1,14 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.tsx'
-import './index.css'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import { WsPlayerProps } from "./types";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+const exampleProps: WsPlayerProps = {
+  wsUrl: "ws://127.0.0.1:4200",
+};
+
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+    <App {...exampleProps} />
+  </React.StrictMode>
+);
