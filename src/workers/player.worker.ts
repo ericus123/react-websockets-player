@@ -1,4 +1,4 @@
-self.onmessage = (e) => {
+self.onmessage = (e: MessageEvent) => {
   if (e.data.type === "start" && e.data.wsUrl) {
     const socket = new WebSocket(e.data.wsUrl);
 

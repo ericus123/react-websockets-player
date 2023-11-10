@@ -5,6 +5,7 @@ import { WsPlayerProps } from "./types";
 
 const exampleProps: WsPlayerProps = {
   wsUrl: "ws://127.0.0.1:4200",
+  withWorker: true,
 };
 
 ReactDOM.createRoot(document.getElementById("root")!).render(

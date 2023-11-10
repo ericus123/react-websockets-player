@@ -4,8 +4,8 @@ import { WsPlayerProps } from "../../types";
 import PlayerLoader from "../loader";
 
 const PlayerWithoutWorker: FC<WsPlayerProps> = ({
-  height,
-  width,
+  height = 600,
+  width = 600,
   wsUrl,
   debug,
   style,
