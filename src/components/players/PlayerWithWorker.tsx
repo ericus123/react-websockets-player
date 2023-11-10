@@ -5,8 +5,8 @@ import { WsPlayerProps } from "../../types";
 import PlayerLoader from "../loader";
 
 const PlayerWithWorker: FC<WsPlayerProps> = ({
-  height,
-  width,
+  height = 600,
+  width = 600,
   wsUrl,
   debug,
   loaderProps,
@@ -23,7 +23,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
     if (!workerRef.current) {
       // Create a web worker when the component mounts
       workerRef.current = new Worker(
-        new URL("../../workers/Player.worker.js", import.meta.url),
+        new URL("../../workers/player.worker.ts", import.meta.url),
       );
 
       workerRef.current.onmessage = (e) => {
