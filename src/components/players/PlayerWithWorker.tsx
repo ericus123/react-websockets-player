@@ -23,7 +23,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
     if (!workerRef.current) {
       // Create a web worker when the component mounts
       workerRef.current = new Worker(
-        new URL("../../workers/Player.worker.js", import.meta.url)
+        new URL("../../workers/Player.worker.js", import.meta.url),
       );
 
       workerRef.current.onmessage = (e) => {
@@ -33,18 +33,21 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
             message: "WebSocket connection opened.",
             type: "warning",
             enabled: debug,
+            event: e,
           });
         } else if (message.type === "close") {
           log({
             message: "WebSocket connection closed.",
             type: "warning",
             enabled: debug,
+            event: e,
           });
         } else if (message.type === "error") {
           log({
             message: "WebSocket error",
             type: "error",
             enabled: debug,
+            event: e,
           });
           if (!isLoading) {
             setIsLoading(true);
@@ -58,7 +61,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
                 0,
                 0,
                 width || canvas?.width || 0,
-                height || canvas?.height || 0
+                height || canvas?.height || 0,
               );
               // Draw the image on the canvas
               ctx.drawImage(
@@ -66,7 +69,7 @@ const PlayerWithWorker: FC<WsPlayerProps> = ({
                 0,
                 0,
                 width || image.width,
-                height || image.height
+                height || image.height,
               );
             }
           };

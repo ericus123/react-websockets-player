@@ -1,7 +1,7 @@
 {
   "name": "react-websockets-video-player",
   "private": false,
-  "version": "0.0.1",
+  "version": "0.0.12",
   "type": "module",
   "main": "dist/index.umd.s",
   "types": "dist/index.d.ts",
@@ -20,11 +20,22 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "prepare": "yarn build"
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint --fix .",
+    "format": "prettier --write .",
+    "precommit": "lint-staged",
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky install",
+    "prepublish": "yarn build"
   },
-  "dependencies": {
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix .",
+      "prettier --write"
+    ]
+  },
+  "peerDependencies": {
     "path": "^0.12.7",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -39,7 +50,14 @@
     "eslint": "^8.45.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.3",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.0.2",
+    "path": "^0.12.7",
+    "prettier": "^3.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "typescript": "^5.0.2",
-    "vite": "^4.4.5"
+    "vite": "^4.4.5",
+    "vite-plugin-dts": "^3.6.3"
   }
 }
