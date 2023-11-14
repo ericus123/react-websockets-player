@@ -25,69 +25,80 @@ const PlayerWithoutWorker: FC<WsPlayerProps> = ({
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
 
-      socketRef.current = new WebSocket(wsUrl);
+      try {
+        socketRef.current = new WebSocket(wsUrl);
 
-      socketRef.current.onopen = (event) => {
-        log({
-          message: "WebSocket connection opened.",
-          type: "message",
-          enabled: debug,
-          event,
-        });
-      };
+        socketRef.current.onopen = (event) => {
+          log({
+            message: "WebSocket connection opened.",
+            type: "message",
+            enabled: debug,
+            event,
+          });
+        };
 
-      socketRef.current.onclose = (event) => {
-        log({
-          message: "WebSocket connection closed.",
-          type: "warning",
-          enabled: debug,
-          event,
-        });
-      };
+        socketRef.current.onclose = (event) => {
+          log({
+            message: "WebSocket connection closed.",
+            type: "warning",
+            enabled: debug,
+            event,
+          });
+        };
 
-      socketRef.current.onerror = (event) => {
+        socketRef.current.onerror = (event) => {
+          log({
+            message: "WebSocket error",
+            type: "error",
+            enabled: debug,
+            event,
+          });
+          if (isLoading) {
+            setIsLoading(false);
+          }
+        };
+
+        socketRef.current.onmessage = (event) => {
+          if (event.data instanceof Blob) {
+            const blobURL = URL.createObjectURL(event.data);
+            const image = new Image();
+
+            image.onload = () => {
+              if (ctx) {
+                // Clear the canvas
+                ctx.clearRect(
+                  0,
+                  0,
+                  width || canvas?.width || 0,
+                  height || canvas?.height || 0,
+                );
+                // Draw the image on the canvas
+                ctx.drawImage(
+                  image,
+                  0,
+                  0,
+                  width || image.width,
+                  height || image.height,
+                );
+              }
+              if (isLoading) {
+                setIsLoading(false);
+              }
+            };
+
+            image.src = blobURL;
+          }
+        };
+      } catch (err) {
         log({
-          message: "WebSocket error",
+          message: "WebSocket connection failed.",
           type: "error",
           enabled: debug,
-          event,
         });
         if (isLoading) {
           setIsLoading(false);
         }
-      };
-
-      socketRef.current.onmessage = (event) => {
-        if (event.data instanceof Blob) {
-          const blobURL = URL.createObjectURL(event.data);
-          const image = new Image();
-
-          image.onload = () => {
-            if (ctx) {
-              // Clear the canvas
-              ctx.clearRect(
-                0,
-                0,
-                width || canvas?.width || 0,
-                height || canvas?.height || 0,
-              );
-              // Draw the image on the canvas
-              ctx.drawImage(
-                image,
-                0,
-                0,
-                width || image.width,
-                height || image.height,
-              );
-            }
-            if (isLoading) {
-              setIsLoading(false);
-            }
-          };
-
-          image.src = blobURL;
-        }
-      };
+      }
     };
 
     manageWebSocketConnection();
