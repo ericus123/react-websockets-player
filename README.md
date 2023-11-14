@@ -4,6 +4,14 @@ React WebSockets Video Player is a versatile React component that allows you to 
 
 **Demo Page:** [View Demo](https://amanieric.com/projects/react-websockets-video-player)
 
+## Important Note
+
+This package is designed specifically for streaming video frames on a canvas and does not support audio playback or any additional features beyond rendering video frames. It is important to note the following details and limitations:
+
+1. **Video Frames Only:** The primary functionality of this package is to display video frames on a canvas. It does not support audio playback or processing.
+
+2. **WebSocket Message Format:** The expected format of WebSocket messages/output from the server should be a Blob. The client-side validation assumes that the received data is a Blob containing video frame information.
+
 ## Table of Contents
 
 - [Installation](#installation)

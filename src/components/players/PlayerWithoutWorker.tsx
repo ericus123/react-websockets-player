@@ -21,7 +21,7 @@ const PlayerWithoutWorker: FC<WsPlayerProps> = ({
       socketRef.current = null;
     }
 
-    const switchDevices = (): void => {
+    const manageWebSocketConnection = (): void => {
       const canvas = canvasRef.current;
       const ctx = canvas?.getContext("2d");
 
@@ -90,7 +90,7 @@ const PlayerWithoutWorker: FC<WsPlayerProps> = ({
       };
     };
 
-    switchDevices();
+    manageWebSocketConnection();
 
     return () => {
       log({
