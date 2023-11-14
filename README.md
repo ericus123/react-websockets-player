@@ -1,6 +1,8 @@
 # React WebSockets Video Player
 
-React WebSockets Player is a versatile React component that allows you to play WebSocket videos and render them to a canvas in a React application. The package provides two versions of the player, one using web workers for enhanced performance and another without web workers.
+React WebSockets Video Player is a versatile React component that allows you to play WebSocket videos and render them to a canvas in a React application. The package provides two versions of the player, one using web workers for enhanced performance and another without web workers.
+
+**Demo Page:** [View Demo](https://amanieric.com/projects/react-websockets-video-player)
 
 ## Table of Contents
 
